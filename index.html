@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LCC Hari Pahlawan - SMP Negeri 1 Semanu</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --secondary: #d97706;
+      --accent: #dc2626;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --success: #16a34a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--text); }
+    header {
+      background: linear-gradient(135deg, var(--primary), #0f172a);
+      color: white;
+      padding: 18px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--secondary);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .school-logo {
+      width: 74px;
+      height: 74px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 6px;
+      border: 3px solid var(--secondary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    header h1 { margin: 0; font-size: 1.4rem; letter-spacing: 0.5px; text-transform: uppercase; }
+    header p { margin: 2px 0 0; font-size: 0.95rem; color: #fde68a; font-weight: 600; }
+    .container { max-width: 900px; margin: 20px auto; padding: 0 16px 40px; }
+    .nav-bar { display: flex; justify-content: flex-end; margin-bottom: 14px; gap: 8px; }
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    h2, h3 { margin-top: 0; color: var(--primary); }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
+    input[type="text"], input[type="password"], input[type="number"], select, textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary-light); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--primary-light); color: white; }
+    .btn-secondary { background: var(--secondary); color: white; }
+    .btn-success { background: var(--success); color: white; }
+    .btn-danger { background: var(--accent); color: white; }
+    .btn-outline { background: white; border: 1.5px solid #cbd5e1; color: var(--text); }
+    .btn-sm { padding: 7px 12px; font-size: 0.85rem; }
+    .btn-block { width: 100%; }
+    .hidden { display: none !important; }
+
+    /* Quiz Styling */
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #eff6ff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #bfdbfe;
+    }
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-gold { background: #fef3c7; color: #b45309; }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .question-text { font-size: 1.12rem; font-weight: 600; line-height: 1.55; margin-bottom: 18px; }
+    .options-grid { display: grid; gap: 10px; }
+    .option-btn {
+      text-align: left;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.15s;
+    }
+    .option-btn:hover { border-color: var(--primary-light); background: #eff6ff; }
+    .option-btn.selected { border-color: var(--primary-light); background: #dbeafe; font-weight: 600; }
+    .opt-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Tabs in Admin */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 18px; }
+    .tab-btn { background: #e2e8f0; color: var(--text); border: none; padding: 9px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .tab-btn.active { background: var(--primary); color: white; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { background: #f8fafc; color: var(--primary); font-weight: 700; }
+    tr:hover td { background: #f8fafc; }
+
+    .q-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+
+footer {
+  background: #0f172a;
+  color: #94a3b8;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
+  border-top: 1px solid #1e293b;
+  margin-top: auto;
+}
+    
+    .q-item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img id="schoolLogoDisplay" class="school-logo" alt="Logo SMPN 1 Semanu" />
+    <div>
+      <h1 id="schoolNameDisplay">SMP NEGERI 1 SEMANU</h1>
+      <p id="quizTitleDisplay">Lomba Cerdas Cermat dalam Rangka Memperingati Hari Pahlawan</p>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="nav-bar">
+    <button id="btnModeSiswa" class="btn btn-outline btn-sm hidden" onclick="switchView('student')">← Halaman Peserta</button>
+    <button id="btnModeGuru" class="btn btn-secondary btn-sm" onclick="openAdminLogin()">🔒 Mode Guru / Admin</button>
+  </div>
+
+  <!-- VIEW 1: PENDAFTARAN PESERTA -->
+  <div id="viewStudentStart" class="card">
+    <h2>Pendaftaran Regu Peserta</h2>
+    <p style="color:var(--muted); margin-top:-6px; margin-bottom:16px;">Silakan pilih kelas, tahap perlombaan, dan masukkan password yang diberikan panitia/guru.</p>
+
+    <div class="form-group">
+      <label for="inputKelas">Pilih Kelas (18 Kelas)</label>
+      <select id="inputKelas">
+        <option value="">-- Pilih Kelas --</option>
+        <optgroup label="Kelas VII">
+          <option value="VII A">VII A</option><option value="VII B">VII B</option><option value="VII C">VII C</option>
+          <option value="VII D">VII D</option><option value="VII E">VII E</option><option value="VII F">VII F</option>
+        </optgroup>
+        <optgroup label="Kelas VIII">
+          <option value="VIII A">VIII A</option><option value="VIII B">VIII B</option><option value="VIII C">VIII C</option>
+          <option value="VIII D">VIII D</option><option value="VIII E">VIII E</option><option value="VIII F">VIII F</option>
+        </optgroup>
+        <optgroup label="Kelas IX">
+          <option value="IX A">IX A</option><option value="IX B">IX B</option><option value="IX C">IX C</option>
+          <option value="IX D">IX D</option><option value="IX E">IX E</option><option value="IX F">IX F</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="inputNamaRegu">Nama Anggota Regu / Perwakilan (Opsional)</label>
+      <input type="text" id="inputNamaRegu" placeholder="Contoh: Regu Garuda (Andi, Budi, Citra)" />
+    </div>
+
+    <div class="form-group">
+      <label for="selectTahap">Pilih Tahap / Mata Pelajaran</label>
+      <select id="selectTahap" onchange="checkStagePasswordUI()"></select>
+    </div>
+
+    <div class="form-group" id="stagePassGroup">
+      <label for="inputStagePass">Password Akses Tahap</label>
+      <input type="password" id="inputStagePass" placeholder="Masukkan password dari guru..." />
+    </div>
+
+    <button class="btn btn-primary btn-block" onclick="startQuiz()">Mulai Mengerjakan Soal ▶</button>
+  </div>
+
+  <!-- VIEW 2: AREA KUIS -->
+  <div id="viewQuiz" class="card hidden">
+    <div class="quiz-top">
+      <div>
+        <span class="badge badge-blue" id="quizInfoKelas">Kelas</span>
+        <span class="badge badge-gold" id="quizInfoTahap">Tahap</span>
+      </div>
+      <div style="font-weight:700; color:var(--primary);">
+        Soal <span id="qCurrentNum">1</span> / <span id="qTotalNum">25</span>
+      </div>
+    </div>
+
+    <div class="question-text" id="questionText">Memuat soal...</div>
+    <div class="options-grid" id="optionsContainer"></div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:22px; gap:10px;">
+      <button class="btn btn-outline" id="btnPrevQ" onclick="prevQuestion()">← Sebelumnya</button>
+      <button class="btn btn-primary" id="btnNextQ" onclick="nextQuestion()">Selanjutnya →</button>
+      <button class="btn btn-success hidden" id="btnFinishQ" onclick="finishQuiz()">Selesai & Kirim Jawaban ✔</button>
+    </div>
+  </div>
+
+  <!-- VIEW 3: HASIL PESERTA -->
+  <div id="viewResult" class="card hidden" style="text-align:center;">
+    <h2>🎉 Hasil Lomba Cerdas Cermat</h2>
+    <p id="resReguInfo" style="font-size:1.05rem; font-weight:600; color:var(--muted);"></p>
+    <div style="background:#eff6ff; border:2px solid #bfdbfe; border-radius:14px; padding:22px; max-width:360px; margin:18px auto;">
+      <div style="font-size:0.9rem; color:var(--primary); font-weight:700;">SKOR AKHIR</div>
+      <div id="resScore" style="font-size:3rem; font-weight:800; color:var(--primary-light); line-height:1.1; margin:6px 0;">0</div>
+      <div id="resDetail" style="font-size:0.92rem; color:var(--text);">Benar: 0 | Salah: 0</div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--muted);">Nilai Anda telah tersimpan otomatis ke papan peringkat panitia/guru.</p>
+    <button class="btn btn-primary" onclick="resetToHome()">Kembali ke Halaman Awal</button>
+  </div>
+
+  <!-- VIEW 4: ADMIN / MODE GURU -->
+  <div id="viewAdmin" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+      <h2 style="margin:0;">⚙️ Panel Guru & Panitia LCC</h2>
+      <button class="btn btn-outline btn-sm" onclick="switchView('student')">Keluar Mode Guru</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tabBtnRekap" onclick="switchAdminTab('rekap')">🏆 Rekap & Ranking</button>
+      <button class="tab-btn" id="tabBtnSoal" onclick="switchAdminTab('soal')">📚 Bank Soal (<span id="countSoalBadge">50</span>)</button>
+      <button class="tab-btn" id="tabBtnSandi" onclick="switchAdminTab('sandi')">🔑 Sandi & Identitas</button>
+    </div>
+
+    <!-- TAB 1: REKAP & RANKING -->
+    <div id="adminTabRekap">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+        <div style="min-width:240px;">
+          <label for="filterRekapTahap" style="margin-bottom:4px;">Filter Tahap Perlombaan:</label>
+          <select id="filterRekapTahap" onchange="renderLeaderboard()"></select>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-success btn-sm" onclick="exportCSV()">📥 Ekspor CSV / Excel</button>
+          <button class="btn btn-danger btn-sm" onclick="clearLeaderboard()">🗑️ Reset Rekap Nilai</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Kelas</th>
+              <th>Nama Regu</th>
+              <th>Benar</th>
+              <th>Skor</th>
+              <th>Status Kelolosan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: BANK SOAL -->
+    <div id="adminTabSoal" class="hidden">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:16px; background:#f8fafc; padding:12px; border-radius:10px; border:1px solid var(--border);">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary btn-sm" onclick="exportJSON()">📤 Ekspor Soal (JSON)</button>
+          <label class="btn btn-outline btn-sm" style="margin:0; cursor:pointer;">
+            📥 Impor Soal (JSON)
+            <input type="file" accept=".json" style="display:none;" onchange="importJSON(event)" />
+          </label>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-secondary btn-sm" onclick="restoreDefaultQuestions()">↺ Pulihkan 50 Soal PPKn</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteAllQuestions()">🗑️ Hapus Semua Soal</button>
+        </div>
+      </div>
+
+      <div style="background:#eff6ff; padding:16px; border-radius:10px; border:1px solid #bfdbfe; margin-bottom:18px;">
+        <h3 id="formSoalTitle" style="margin-bottom:10px;">+ Tambah / Edit Soal</h3>
+        <input type="hidden" id="editSoalIndex" value="-1" />
+        <div class="form-group">
+          <label>Kategori / Tahap</label>
+          <input type="text" id="soalCategory" placeholder="Contoh: PPKn - Tahap 1 (Penyisihan)" />
+        </div>
+        <div class="form-group">
+          <label>Pertanyaan</label>
+          <textarea id="soalQuestion" rows="2" placeholder="Tulis pertanyaan di sini..."></textarea>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom:12px;">
+          <div><label>Pilihan A</label><input type="text" id="optA" /></div>
+          <div><label>Pilihan B</label><input type="text" id="optB" /></div>
+          <div><label>Pilihan C</label><input type="text" id="optC" /></div>
+          <div><label>Pilihan D</label><input type="text" id="optD" /></div>
+        </div>
+        <div class="form-group">
+          <label>Kunci Jawaban Benar</label>
+          <select id="soalAnswer">
+            <option value="0">A</option>
+            <option value="1">B</option>
+            <option value="2">C</option>
+            <option value="3">D</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" onclick="saveQuestion()">Simpan Soal</button>
+          <button class="btn btn-outline hidden" id="btnCancelEdit" onclick="cancelEditQuestion()">Batal Edit</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label>Filter Tampilan Bank Soal:</label>
+        <select id="filterBankSoal" onchange="renderQuestionList()"></select>
+      </div>
+      <div id="questionListContainer"></div>
+    </div>
+
+    <!-- TAB 3: SANDI & IDENTITAS -->
+    <div id="adminTabSandi" class="hidden">
+      <h3>🔐 Atur Password per Tahap / Kategori</h3>
+      <p style="font-size:0.9rem; color:var(--muted);">Kosongkan jika tahap tidak memerlukan password. Password default: <b>PAHLAWAN1</b> (Tahap 1) dan <b>MERDEKA2</b> (Tahap 2).</p>
+      <div id="stagePasswordSettings"></div>
+      <button class="btn btn-primary" style="margin-bottom:24px;" onclick="saveStagePasswords()">Simpan Password Tahap</button>
+
+      <hr style="border:none; border-top:1px solid var(--border); margin:20px 0;" />
+
+      <h3>🏫 Identitas Sekolah & Logo</h3>
+      <div class="form-group">
+        <label>Nama Sekolah</label>
+        <input type="text" id="settingSchoolName" />
+      </div>
+      <div class="form-group">
+        <label>Judul Perlombaan</label>
+        <input type="text" id="settingQuizTitle" />
+      </div>
+      <div class="form-group">
+        <label>Unggah Logo Sekolah Baru (PNG/JPG)</label>
+        <input type="file" accept="image/*" onchange="uploadSchoolLogo(event)" />
+      </div>
+      <div class="form-group">
+        <label>Ubah PIN Mode Guru (Default: 1234)</label>
+        <input type="text" id="settingAdminPin" maxlength="10" />
+      </div>
+      <button class="btn btn-success" onclick="saveGeneralSettings()">Simpan Pengaturan Sekolah & PIN</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Default SVG Shield Logo SMPN 1 Semanu
+  const DEFAULT_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <path d="M60 6 L108 24 V62 C108 90 86 108 60 116 C34 108 12 90 12 62 V24 Z" fill="#1e3a8a" stroke="#d97706" stroke-width="6"/>
+      <circle cx="60" cy="54" r="24" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+      <polygon points="60,34 65,48 80,48 68,57 72,71 60,62 48,71 52,57 40,48 55,48" fill="#d97706"/>
+      <text x="60" y="96" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">SMPN 1 SEMANU</text>
+    </svg>
+  `);
+
+  const STAGE_1 = "PPKn - Tahap 1 (Penyisihan 18 Kelas)";
+  const STAGE_2 = "PPKn - Tahap 2 (Babak Final 9 Besar)";
+
+  // 50 Soal Resmi Tahap 1 & Tahap 2 beserta Kunci Jawaban Paket A & Paket B
+  const DEFAULT_QUESTIONS = [
+    // --- TAHAP 1 (25 SOAL - KUNCI PAKET A) ---
+    { category: STAGE_1, question: "Hari Pahlawan diperingati setiap tanggal ....", options: ["17 Agustus", "10 November", "20 Mei", "28 Oktober"], answer: 1 },
+    { category: STAGE_1, question: "Peristiwa yang melatarbelakangi ditetapkannya tanggal 10 November sebagai Hari Pahlawan adalah ....", options: ["Proklamasi Kemerdekaan Indonesia", "Peristiwa Rengasdengklok", "Pertempuran Surabaya", "Kongres Pemuda II"], answer: 2 },
+    { category: STAGE_1, question: "Tokoh yang dikenal sebagai pemimpin perjuangan rakyat Surabaya melalui siaran radio yang membakar semangat perlawanan adalah ....", options: ["Bung Tomo", "Ki Hajar Dewantara", "Mohammad Hatta", "Jenderal Sudirman"], answer: 0 },
+    { category: STAGE_1, question: "Organisasi pergerakan nasional Budi Utomo berdiri pada tanggal ....", options: ["20 Mei 1908", "28 Oktober 1928", "17 Agustus 1945", "10 November 1945"], answer: 0 },
+    { category: STAGE_1, question: "Tokoh yang dikenal sebagai Bapak Pendidikan Nasional adalah ....", options: ["Ir. Soekarno", "Ki Hajar Dewantara", "Mohammad Yamin", "Ahmad Dahlan"], answer: 1 },
+    { category: STAGE_1, question: "Proklamasi Kemerdekaan Indonesia dibacakan oleh ....", options: ["Mohammad Hatta dan Sutan Sjahrir", "Soekarno dan Mohammad Hatta", "Ahmad Soebardjo dan Soekarno", "Jenderal Sudirman dan Soekarno"], answer: 1 },
+    { category: STAGE_1, question: "Tokoh perempuan yang dikenal memperjuangkan emansipasi wanita melalui pendidikan adalah ....", options: ["Cut Nyak Dien", "Dewi Sartika", "R.A. Kartini", "Martha Christina Tiahahu"], answer: 2 },
+    { category: STAGE_1, question: "Panglima Besar Tentara Nasional Indonesia yang terkenal dengan strategi perang gerilya adalah ....", options: ["Jenderal Sudirman", "Bung Tomo", "Pattimura", "Pangeran Diponegoro"], answer: 0 },
+    { category: STAGE_1, question: "Perjuangan bangsa Indonesia sebelum abad ke-20 umumnya masih bersifat kedaerahan. Salah satu kelemahan perjuangan tersebut adalah ....", options: ["Tidak memiliki pemimpin", "Mudah dipatahkan karena kurangnya persatuan", "Tidak memiliki tujuan", "Tidak mendapat dukungan rakyat"], answer: 1 },
+    { category: STAGE_1, question: "Peristiwa Sumpah Pemuda pada 28 Oktober 1928 memiliki arti penting bagi perjuangan bangsa karena ....", options: ["Menandai berakhirnya penjajahan", "Menyatukan tekad pemuda untuk berbangsa, bertanah air, dan berbahasa satu", "Membentuk pemerintahan Indonesia", "Menetapkan dasar negara Indonesia"], answer: 1 },
+    { category: STAGE_1, question: "Salah satu nilai kepahlawanan yang ditunjukkan oleh Jenderal Sudirman ketika tetap memimpin perang gerilya dalam kondisi sakit adalah ....", options: ["Keberanian dan pantang menyerah", "Kekuasaan dan kekayaan", "Kepentingan pribadi", "Persaingan antardaerah"], answer: 0 },
+    { category: STAGE_1, question: "Perlawanan Pangeran Diponegoro terhadap Belanda berlangsung pada tahun ....", options: ["1808–1813", "1825–1830", "1908–1912", "1945–1949"], answer: 1 },
+    { category: STAGE_1, question: "Tokoh yang memimpin perlawanan rakyat Maluku terhadap Belanda pada tahun 1817 adalah ....", options: ["Sultan Hasanuddin", "Pattimura", "Tuanku Imam Bonjol", "Pangeran Antasari"], answer: 1 },
+    { category: STAGE_1, question: "Makna semboyan \"Merdeka atau Mati\" dalam perjuangan bangsa Indonesia adalah ....", options: ["Mengutamakan kepentingan kelompok", "Berjuang dengan sungguh-sungguh demi kemerdekaan", "Menghindari tanggung jawab", "Menyerahkan perjuangan kepada bangsa lain"], answer: 1 },
+    { category: STAGE_1, question: "Peristiwa Bandung Lautan Api merupakan bentuk perjuangan rakyat Indonesia dengan cara ....", options: ["Melakukan diplomasi dengan Jepang", "Membumihanguskan wilayah Bandung bagian selatan agar tidak dimanfaatkan musuh", "Menyerahkan Bandung kepada Sekutu", "Memindahkan ibu kota negara"], answer: 1 },
+    { category: STAGE_1, question: "Salah satu tujuan pembentukan BPUPKI adalah ....", options: ["Membantu Belanda menguasai Indonesia", "Menyelidiki dan mempersiapkan hal-hal penting bagi kemerdekaan Indonesia", "Membentuk organisasi militer Belanda", "Menghapus organisasi pergerakan nasional"], answer: 1 },
+    { category: STAGE_1, question: "Sikap rela berkorban yang dapat dilakukan seorang pelajar sebagai bentuk meneladani pahlawan adalah ....", options: ["Mengutamakan kepentingan pribadi", "Membantu teman yang mengalami kesulitan belajar", "Menolak mengikuti kegiatan sekolah", "Memaksakan pendapat kepada teman"], answer: 1 },
+    { category: STAGE_1, question: "Perjuangan para pahlawan dahulu dilakukan dengan mengangkat senjata, sedangkan generasi muda sekarang hidup dalam suasana kemerdekaan. Bentuk perjuangan yang paling tepat dilakukan pelajar saat ini adalah ....", options: ["Mengikuti semua tren dari luar negeri", "Belajar sungguh-sungguh, berprestasi, dan menjaga persatuan", "Menghindari kegiatan sosial", "Mengutamakan kepentingan kelompok sendiri"], answer: 1 },
+    { category: STAGE_1, question: "Di sebuah sekolah terjadi konflik antarkelompok siswa karena perbedaan suku dan budaya. Jika meneladani semangat para pahlawan, tindakan yang paling tepat adalah ....", options: ["Membela kelompok sendiri tanpa mempertimbangkan kebenaran", "Membiarkan konflik terus terjadi", "Mengajak semua pihak berdialog dan menghargai perbedaan", "Menghindari semua teman yang berbeda budaya"], answer: 2 },
+    { category: STAGE_1, question: "Para pahlawan berjuang tanpa mengharapkan imbalan. Nilai tersebut paling tepat diterapkan oleh seorang ketua kelas dengan cara ....", options: ["Meminta penghargaan atas setiap tugas", "Melaksanakan tanggung jawab dengan ikhlas dan adil", "Memilih teman dekat sebagai anggota kelompok", "Menyerahkan seluruh tugas kepada anggota lain"], answer: 1 },
+    { category: STAGE_1, question: "Perjuangan bangsa Indonesia berhasil mencapai kemerdekaan karena adanya persatuan dan kerja sama. Jika nilai tersebut tidak diterapkan dalam kehidupan berbangsa, kemungkinan yang terjadi adalah ....", options: ["Kehidupan masyarakat semakin harmonis", "Perpecahan dan melemahnya kekuatan bangsa", "Pembangunan berjalan lebih cepat", "Persatuan semakin kuat"], answer: 1 },
+    { category: STAGE_1, question: "Seorang siswa menemukan berita di media sosial yang berisi penghinaan terhadap salah satu pahlawan nasional. Tindakan yang paling mencerminkan sikap nasionalisme adalah ....", options: ["Langsung menyebarkan berita tersebut", "Membalas dengan hinaan yang lebih keras", "Memeriksa kebenaran informasi dan menyampaikan tanggapan secara santun", "Mengajak teman untuk menyerang akun tersebut"], answer: 2 },
+    { category: STAGE_1, question: "Mengapa perjuangan melalui pendidikan dapat disebut sebagai salah satu bentuk perjuangan modern?", options: ["Karena pendidikan dapat meningkatkan kualitas sumber daya manusia dan kemajuan bangsa", "Karena pendidikan hanya bertujuan memperoleh pekerjaan", "Karena pendidikan membuat seseorang lebih berkuasa", "Karena pendidikan tidak membutuhkan pengorbanan"], answer: 0 },
+    { category: STAGE_1, question: "Dalam sebuah kegiatan sosial, beberapa siswa enggan membantu membersihkan lingkungan karena merasa bukan tugas mereka. Sikap yang paling mencerminkan semangat kepahlawanan adalah ....", options: ["Membiarkan pekerjaan dilakukan oleh petugas kebersihan", "Mengajak teman bekerja sama demi kepentingan bersama", "Menunggu perintah guru terlebih dahulu", "Meninggalkan kegiatan tersebut"], answer: 1 },
+    { category: STAGE_1, question: "Perhatikan pernyataan berikut:\n1) Menghargai jasa para pahlawan.\n2) Mengutamakan kepentingan bangsa.\n3) Menyebarkan kebencian terhadap kelompok lain.\n4) Menjaga persatuan dan kesatuan.\n5) Menolak bekerja sama dengan orang yang berbeda suku.\nPerilaku yang mencerminkan semangat kepahlawanan ditunjukkan oleh nomor ....", options: ["1, 2, dan 3", "1, 2, dan 4", "2, 3, dan 5", "3, 4, dan 5"], answer: 1 },
+
+    // --- TAHAP 2 (25 SOAL - KUNCI PAKET B) ---
+    { category: STAGE_2, question: "Tokoh yang mendapat julukan Ayam Jantan dari Timur adalah ....", options: ["Sultan Agung", "Sultan Hasanuddin", "Pangeran Antasari", "Tuanku Imam Bonjol"], answer: 1 },
+    { category: STAGE_2, question: "Cut Nyak Dien merupakan pahlawan nasional yang berasal dari ....", options: ["Sumatra Barat", "Jawa Tengah", "Aceh", "Maluku"], answer: 2 },
+    { category: STAGE_2, question: "Tokoh yang dikenal sebagai pemimpin perlawanan rakyat Sumatra Barat dalam Perang Padri adalah ....", options: ["Tuanku Imam Bonjol", "Sultan Hasanuddin", "Pattimura", "Pangeran Diponegoro"], answer: 0 },
+    { category: STAGE_2, question: "Tanggal 20 Mei diperingati sebagai Hari ....", options: ["Kebangkitan Nasional", "Kesaktian Pancasila", "Pendidikan Nasional", "Sumpah Pemuda"], answer: 0 },
+    { category: STAGE_2, question: "Tokoh yang mengetik naskah Proklamasi Kemerdekaan Indonesia adalah ....", options: ["Sayuti Melik", "Ahmad Soebardjo", "Sukarni", "Wikana"], answer: 0 },
+    { category: STAGE_2, question: "Tokoh yang dikenal sebagai Bapak Koperasi Indonesia adalah ....", options: ["Soekarno", "Mohammad Hatta", "Ki Hajar Dewantara", "Sutan Sjahrir"], answer: 1 },
+    { category: STAGE_2, question: "Peristiwa Rengasdengklok terjadi pada tanggal ....", options: ["1 Juni 1945", "16 Agustus 1945", "17 Agustus 1945", "18 Agustus 1945"], answer: 1 },
+    { category: STAGE_2, question: "Pahlawan nasional yang berasal dari Maluku dan memimpin perlawanan terhadap Belanda pada tahun 1817 adalah ....", options: ["Pattimura", "Pangeran Antasari", "Sultan Ageng Tirtayasa", "Teuku Umar"], answer: 0 },
+    { category: STAGE_2, question: "Salah satu faktor yang mendorong lahirnya pergerakan nasional Indonesia adalah ....", options: ["Meningkatnya kesadaran rakyat akan pentingnya persatuan dan kemerdekaan", "Keinginan rakyat untuk memperkuat penjajahan", "Dukungan penuh pemerintah kolonial terhadap kemerdekaan", "Hilangnya semangat perjuangan rakyat"], answer: 0 },
+    { category: STAGE_2, question: "Perjuangan R.A. Kartini dalam memajukan bangsa Indonesia dilakukan melalui ....", options: ["Perlawanan bersenjata", "Pengembangan pendidikan dan emansipasi perempuan", "Perdagangan internasional", "Pembentukan organisasi militer"], answer: 1 },
+    { category: STAGE_2, question: "Salah satu faktor penyebab kemenangan Jepang atas Belanda pada tahun 1942 adalah ....", options: ["Jepang memperoleh bantuan langsung dari rakyat Indonesia untuk menjajah Belanda", "Kekuatan militer Jepang berhasil mengalahkan pertahanan Belanda", "Belanda menyerahkan seluruh wilayahnya secara sukarela", "Jepang telah menjadi negara merdeka Indonesia"], answer: 1 },
+    { category: STAGE_2, question: "Organisasi yang didirikan oleh tiga tokoh, yaitu Douwes Dekker, Ki Hajar Dewantara, dan dr. Cipto Mangunkusumo adalah ....", options: ["Budi Utomo", "Sarekat Islam", "Indische Partij", "Perhimpunan Indonesia"], answer: 2 },
+    { category: STAGE_2, question: "Peristiwa 10 November 1945 menunjukkan bahwa rakyat Indonesia ....", options: ["Bersedia menyerahkan kemerdekaan kepada Sekutu", "Memiliki semangat mempertahankan kemerdekaan dengan pengorbanan besar", "Tidak memiliki kekuatan untuk melawan penjajah", "Mengutamakan kepentingan pribadi"], answer: 1 },
+    { category: STAGE_2, question: "Salah satu hasil penting Sidang PPKI tanggal 18 Agustus 1945 adalah ....", options: ["Membentuk BPUPKI", "Menetapkan UUD 1945", "Membentuk organisasi Budi Utomo", "Membacakan teks Proklamasi"], answer: 1 },
+    { category: STAGE_2, question: "Tokoh perempuan dari Maluku yang dikenal berjuang melawan penjajah Belanda sejak usia muda adalah ....", options: ["Martha Christina Tiahahu", "R.A. Kartini", "Dewi Sartika", "Cut Meutia"], answer: 0 },
+    { category: STAGE_2, question: "Makna penting peristiwa Bandung Lautan Api bagi bangsa Indonesia adalah ....", options: ["Bukti bahwa rakyat Bandung tidak mampu mempertahankan wilayahnya", "Bukti keberanian dan pengorbanan rakyat untuk mempertahankan kemerdekaan", "Bentuk dukungan rakyat terhadap penjajahan", "Awal pembentukan pemerintahan kolonial"], answer: 1 },
+    { category: STAGE_2, question: "Sikap yang menunjukkan nilai patriotisme di lingkungan sekolah adalah ....", options: ["Mengikuti upacara bendera dengan tertib dan khidmat", "Mengejek teman yang berbeda daerah", "Mengabaikan peraturan sekolah", "Tidak peduli terhadap lingkungan sekolah"], answer: 0 },
+    { category: STAGE_2, question: "Para pahlawan memiliki keberanian untuk memperjuangkan kemerdekaan meskipun menghadapi risiko besar. Dalam kehidupan pelajar, nilai keberanian tersebut dapat diwujudkan melalui ....", options: ["Berani melanggar aturan demi mendapatkan pujian", "Berani menyampaikan pendapat yang benar dengan santun dan bertanggung jawab", "Berani menentang semua pendapat teman", "Berani melakukan tindakan yang membahayakan orang lain"], answer: 1 },
+    { category: STAGE_2, question: "Indonesia memiliki banyak suku, agama, ras, dan budaya. Jika dikaitkan dengan perjuangan para pahlawan yang berasal dari berbagai daerah, kesimpulan yang paling tepat adalah ....", options: ["Kemerdekaan hanya diperjuangkan oleh satu kelompok masyarakat", "Perbedaan merupakan penghalang untuk mencapai kemerdekaan", "Keberagaman dapat menjadi kekuatan apabila disatukan oleh semangat persatuan", "Setiap daerah sebaiknya memperjuangkan kepentingannya sendiri"], answer: 2 },
+    { category: STAGE_2, question: "Seorang siswa melihat temannya melakukan perundungan terhadap siswa lain. Jika menerapkan nilai kepahlawanan, tindakan terbaik adalah ....", options: ["Membiarkan karena bukan urusannya", "Ikut mengejek agar diterima kelompok", "Membela korban dengan cara yang aman dan melaporkan kepada guru", "Merekam kejadian untuk dijadikan hiburan"], answer: 2 },
+    { category: STAGE_2, question: "Perhatikan ilustrasi berikut!\nDalam sebuah perlombaan antarkelas, tim kelas VIII mengalami kekalahan. Beberapa anggota tim saling menyalahkan sehingga suasana menjadi tidak nyaman.\nSikap yang paling sesuai dengan semangat perjuangan para pahlawan adalah ....", options: ["Meninggalkan kelompok karena merasa kecewa", "Mencari siapa yang paling bertanggung jawab atas kekalahan", "Melakukan evaluasi bersama dan memperbaiki kekurangan untuk perjuangan berikutnya", "Menolak mengikuti perlombaan selanjutnya"], answer: 2 },
+    { category: STAGE_2, question: "Pada masa penjajahan, para pahlawan menggunakan berbagai cara untuk melawan ketidakadilan. Pada masa sekarang, seorang pelajar menemukan praktik ketidakadilan di lingkungan sekolah. Tindakan yang paling tepat adalah ....", options: ["Melakukan tindakan balas dendam", "Menyampaikan fakta dan mencari penyelesaian melalui cara yang benar", "Menyebarkan informasi tanpa bukti", "Mengajak teman melakukan kekerasan"], answer: 1 },
+    { category: STAGE_2, question: "Perhatikan beberapa tindakan berikut!\n1. Menggunakan produk dalam negeri.\n2. Menghargai budaya daerah lain.\n3. Menyebarkan berita bohong tentang bangsa sendiri.\n4. Belajar untuk mengembangkan ilmu pengetahuan.\n5. Menganggap budaya sendiri paling unggul dan merendahkan budaya lain.\nTindakan yang mencerminkan nasionalisme secara positif adalah ....", options: ["1, 2, dan 4", "1, 3, dan 5", "2, 3, dan 4", "3, 4, dan 5"], answer: 0 },
+    { category: STAGE_2, question: "Kemerdekaan Indonesia diperoleh melalui perjuangan panjang dan pengorbanan para pahlawan. Apabila generasi muda tidak menghargai sejarah perjuangan bangsa, dampak yang paling mungkin terjadi adalah ....", options: ["Semangat nasionalisme semakin kuat", "Generasi muda kehilangan pemahaman tentang identitas dan jati diri bangsa", "Persatuan bangsa semakin kokoh", "Kesadaran berbangsa semakin meningkat"], answer: 1 },
+    { category: STAGE_2, question: "Sekelompok siswa akan membuat kegiatan peringatan Hari Pahlawan. Mereka memiliki dua pilihan kegiatan:\nKegiatan I: Mengadakan lomba menyanyikan lagu perjuangan saja.\nKegiatan II: Mengadakan lomba lagu perjuangan sekaligus aksi sosial membantu masyarakat sekitar.\nJika tujuan kegiatan adalah meneladani nilai perjuangan pahlawan secara nyata, pilihan yang paling tepat adalah ....", options: ["Kegiatan I, karena hanya membutuhkan waktu singkat", "Kegiatan II, karena menggabungkan penghargaan sejarah dengan tindakan nyata kepedulian sosial", "Kedua kegiatan tidak perlu dilaksanakan", "Kegiatan I, karena kegiatan sosial bukan bagian dari semangat kepahlawanan"], answer: 1 }
+  ];
+
+  // State Management
+  let questions = JSON.parse(localStorage.getItem("lcc_semanu_questions_v2")) || JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
+  let stagePasswords = JSON.parse(localStorage.getItem("lcc_semanu_stage_pass_v2")) || {
+    [STAGE_1]: "PAHLAWAN1",
+    [STAGE_2]: "MERDEKA2"
+  };
+  let leaderboard = JSON.parse(localStorage.getItem("lcc_semanu_scores_v2")) || [];
+  let settings = JSON.parse(localStorage.getItem("lcc_semanu_settings_v2")) || {
+    schoolName: "SMP NEGERI 1 SEMANU",
+    quizTitle: "Lomba Cerdas Cermat dalam Rangka Memperingati Hari Pahlawan",
+    logo: DEFAULT_LOGO,
+    adminPin: "1234"
+  };
+
+  let activeQuiz = {
+    kelas: "",
+    namaRegu: "",
+    tahap: "",
+    items: [],
+    answers: [],
+    currentIndex: 0
+  };
+
+  function saveAllState() {
+    localStorage.setItem("lcc_semanu_questions_v2", JSON.stringify(questions));
+    localStorage.setItem("lcc_semanu_stage_pass_v2", JSON.stringify(stagePasswords));
+    localStorage.setItem("lcc_semanu_scores_v2", JSON.stringify(leaderboard));
+    localStorage.setItem("lcc_semanu_settings_v2", JSON.stringify(settings));
+  }
+
+  function applyBranding() {
+    document.getElementById("schoolNameDisplay").textContent = settings.schoolName;
+    document.getElementById("quizTitleDisplay").textContent = settings.quizTitle;
+    document.getElementById("schoolLogoDisplay").src = settings.logo || DEFAULT_LOGO;
+  }
+
+  function getCategories() {
+    const cats = [...new Set(questions.map(q => q.category))];
+    return cats.length ? cats : [STAGE_1, STAGE_2];
+  }
+
+  function populateCategoryDropdowns() {
+    const cats = getCategories();
+    const selTahap = document.getElementById("selectTahap");
+    const selRekap = document.getElementById("filterRekapTahap");
+    const selBank = document.getElementById("filterBankSoal");
+
+    selTahap.innerHTML = cats.map(c => `<option value="${c}">${c}</option>`).join("");
+    selRekap.innerHTML = `<option value="ALL">Semua Tahap</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join("");
+    selBank.innerHTML = `<option value="ALL">Semua Kategori (${questions.length} soal)</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join("");
+    document.getElementById("countSoalBadge").textContent = questions.length;
+    checkStagePasswordUI();
+  }
+
+  function checkStagePasswordUI() {
+    const selected = document.getElementById("selectTahap").value;
+    const reqPass = stagePasswords[selected];
+    const passGroup = document.getElementById("stagePassGroup");
+    if (reqPass && reqPass.trim() !== "") {
+      passGroup.classList.remove("hidden");
+    } else {
+      passGroup.classList.add("hidden");
+    }
+  }
+
+  // Student Quiz Flow
+  function startQuiz() {
+    const kelas = document.getElementById("inputKelas").value;
+    const namaRegu = document.getElementById("inputNamaRegu").value.trim() || `Regu ${kelas}`;
+    const tahap = document.getElementById("selectTahap").value;
+    const inputPass = document.getElementById("inputStagePass").value.trim();
+
+    if (!kelas) return alert("Silakan pilih Kelas terlebih dahulu!");
+    const reqPass = stagePasswords[tahap];
+    if (reqPass && reqPass.trim() !== "" && inputPass !== reqPass.trim()) {
+      return alert("Password Akses Tahap salah! Silakan minta password kepada guru/panitia.");
+    }
+
+    const filtered = questions.filter(q => q.category === tahap);
+    if (filtered.length === 0) return alert("Belum ada soal pada tahap ini.");
+
+    activeQuiz = {
+      kelas,
+      namaRegu,
+      tahap,
+      items: filtered,
+      answers: new Array(filtered.length).fill(null),
+      currentIndex: 0
+    };
+
+    document.getElementById("viewStudentStart").classList.add("hidden");
+    document.getElementById("viewQuiz").classList.remove("hidden");
+    document.getElementById("quizInfoKelas").textContent = `Kelas ${kelas}`;
+    document.getElementById("quizInfoTahap").textContent = tahap;
+    document.getElementById("qTotalNum").textContent = filtered.length;
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const idx = activeQuiz.currentIndex;
+    const item = activeQuiz.items[idx];
+    document.getElementById("qCurrentNum").textContent = idx + 1;
+    document.getElementById("questionText").innerText = `${idx + 1}. ${item.question}`;
+
+    const letters = ["A", "B", "C", "D"];
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = item.options.map((opt, i) => `
+      <button class="option-btn ${activeQuiz.answers[idx] === i ? 'selected' : ''}" onclick="selectOption(${i})">
+        <span class="opt-letter">${letters[i]}</span>
+        <span>${opt}</span>
+      </button>
+    `).join("");
+
+    document.getElementById("btnPrevQ").disabled = idx === 0;
+    if (idx === activeQuiz.items.length - 1) {
+      document.getElementById("btnNextQ").classList.add("hidden");
+      document.getElementById("btnFinishQ").classList.remove("hidden");
+    } else {
+      document.getElementById("btnNextQ").classList.remove("hidden");
+      document.getElementById("btnFinishQ").classList.add("hidden");
+    }
+  }
+
+  function selectOption(optIdx) {
+    activeQuiz.answers[activeQuiz.currentIndex] = optIdx;
+    renderQuestion();
+  }
+
+  function prevQuestion() {
+    if (activeQuiz.currentIndex > 0) {
+      activeQuiz.currentIndex--;
+      renderQuestion();
+    }
+  }
+
+  function nextQuestion() {
+    if (activeQuiz.currentIndex < activeQuiz.items.length - 1) {
+      activeQuiz.currentIndex++;
+      renderQuestion();
+    }
+  }
+
+  function finishQuiz() {
+    const unanswered = activeQuiz.answers.filter(a => a === null).length;
+    if (unanswered > 0 && !confirm(`Masih ada ${unanswered} soal belum dijawab. Yakin ingin mengirim jawaban?`)) return;
+
+    let correct = 0;
+    activeQuiz.items.forEach((q, idx) => {
+      if (activeQuiz.answers[idx] === q.answer) correct++;
+    });
+
+    const total = activeQuiz.items.length;
+    const score = Math.round((correct / total) * 100);
+
+    leaderboard.push({
+      id: Date.now(),
+      kelas: activeQuiz.kelas,
+      namaRegu: activeQuiz.namaRegu,
+      tahap: activeQuiz.tahap,
+      benar: correct,
+      total: total,
+      skor: score,
+      waktu: new Date().toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' })
+    });
+    saveAllState();
+
+    document.getElementById("viewQuiz").classList.add("hidden");
+    document.getElementById("viewResult").classList.remove("hidden");
+    document.getElementById("resReguInfo").textContent = `Kelas ${activeQuiz.kelas} (${activeQuiz.namaRegu}) — ${activeQuiz.tahap}`;
+    document.getElementById("resScore").textContent = score;
+    document.getElementById("resDetail").textContent = `Benar: ${correct} dari ${total} soal | Salah: ${total - correct}`;
+  }
+
+  function finishQuiz() {
+    const unanswered = activeQuiz.answers.filter(a => a === null).length;
+    if (unanswered > 0 && !confirm(`Masih ada ${unanswered} soal belum dijawab. Yakin ingin mengirim jawaban?`)) return;
+
+    let correct = 0;
+    activeQuiz.items.forEach((q, idx) => {
+      if (activeQuiz.answers[idx] === q.answer) correct++;
+    });
+
+    const total = activeQuiz.items.length;
+    const score = Math.round((correct / total) * 100);
+
+    const resultData = {
+      kelas: activeQuiz.kelas,
+      namaRegu: activeQuiz.namaRegu,
+      tahap: activeQuiz.tahap,
+      benar: correct,
+      total: total,
+      skor: score
+    };
+
+    // KIRIM OTOMATIS KE GOOGLE SHEETS
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzlg42iZwrEgovFR-PbxbnYc6OtYGPkKRb3aXwu9YiTshxt9AVvVGcxISO6siTZxPQ54Q/exec"; // Tempel URL /exec di sini
+    fetch(WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(resultData)
+    }).catch(err => console.log("Gagal kirim ke sheets", err));
+
+    // Simpan lokal juga sebagai cadangan
+    leaderboard.push({ id: Date.now(), ...resultData, waktu: new Date().toLocaleTimeString("id-ID") });
+    saveAllState();
+
+    document.getElementById("viewQuiz").classList.add("hidden");
+    document.getElementById("viewResult").classList.remove("hidden");
+    document.getElementById("resReguInfo").textContent = `Kelas ${activeQuiz.kelas} (${activeQuiz.namaRegu}) — ${activeQuiz.tahap}`;
+    document.getElementById("resScore").textContent = score;
+    document.getElementById("resDetail").textContent = `Benar: ${correct} dari ${total} soal | Salah: ${total - correct}`;
+  }
+  
+  function resetToHome() {
+    document.getElementById("viewResult").classList.add("hidden");
+    document.getElementById("viewStudentStart").classList.remove("hidden");
+    document.getElementById("inputStagePass").value = "";
+  }
+
+  // Admin Navigation & Logic
+  function openAdminLogin() {
+    const pin = prompt("Masukkan PIN Mode Guru / Panitia:");
+    if (pin === null) return;
+    if (pin === settings.adminPin) {
+      switchView("admin");
+    } else {
+      alert("PIN salah!");
+    }
+  }
+
+  function switchView(view) {
+    ["viewStudentStart", "viewQuiz", "viewResult", "viewAdmin"].forEach(id => document.getElementById(id).classList.add("hidden"));
+    if (view === "admin") {
+      document.getElementById("viewAdmin").classList.remove("hidden");
+      document.getElementById("btnModeGuru").classList.add("hidden");
+      document.getElementById("btnModeSiswa").classList.remove("hidden");
+      populateCategoryDropdowns();
+      renderLeaderboard();
+      renderQuestionList();
+      loadSettingsForm();
+    } else {
+      document.getElementById("viewStudentStart").classList.remove("hidden");
+      document.getElementById("btnModeGuru").classList.remove("hidden");
+      document.getElementById("btnModeSiswa").classList.add("hidden");
+      populateCategoryDropdowns();
+    }
+  }
+
+  function switchAdminTab(tab) {
+    ["adminTabRekap", "adminTabSoal", "adminTabSandi"].forEach(id => document.getElementById(id).classList.add("hidden"));
+    ["tabBtnRekap", "tabBtnSoal", "tabBtnSandi"].forEach(id => document.getElementById(id).classList.remove("active"));
+    if (tab === "rekap") {
+      document.getElementById("adminTabRekap").classList.remove("hidden");
+      document.getElementById("tabBtnRekap").classList.add("active");
+      renderLeaderboard();
+    } else if (tab === "soal") {
+      document.getElementById("adminTabSoal").classList.remove("hidden");
+      document.getElementById("tabBtnSoal").classList.add("active");
+      renderQuestionList();
+    } else {
+      document.getElementById("adminTabSandi").classList.remove("hidden");
+      document.getElementById("tabBtnSandi").classList.add("active");
+      loadSettingsForm();
+    }
+  }
+
+  // Leaderboard & Ranking Logic (Top 9 Stage 1, Top 3 Stage 2)
+  function renderLeaderboard() {
+    const filter = document.getElementById("filterRekapTahap").value;
+    let filtered = filter === "ALL" ? [...leaderboard] : leaderboard.filter(item => item.tahap === filter);
+    filtered.sort((a, b) => b.skor - a.skor || b.benar - a.benar || a.id - b.id);
+
+    const tbody = document.getElementById("leaderboardBody");
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--muted); padding:20px;">Belum ada data nilai masuk.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map((row, idx) => {
+      const rank = idx + 1;
+      let statusBadge = `<span class="badge badge-blue">Peserta</span>`;
+      if (row.tahap.includes("Tahap 1")) {
+        statusBadge = rank <= 9
+          ? `<span class="badge badge-green">✔ LOLOS TAHAP 2 (9 BESAR)</span>`
+          : `<span class="badge badge-red">Gugur Penyisihan</span>`;
+      } else if (row.tahap.includes("Tahap 2")) {
+        if (rank === 1) statusBadge = `<span class="badge badge-gold">🥇 JUARA 1</span>`;
+        else if (rank === 2) statusBadge = `<span class="badge badge-gold">🥈 JUARA 2</span>`;
+        else if (rank === 3) statusBadge = `<span class="badge badge-gold">🥉 JUARA 3</span>`;
+        else statusBadge = `<span class="badge badge-blue">Finalis</span>`;
+      }
+      return `
+        <tr>
+          <td><strong>#${rank}</strong></td>
+          <td><strong>${row.kelas}</strong></td>
+          <td>${row.namaRegu}<br><small style="color:var(--muted);">${row.tahap}</small></td>
+          <td>${row.benar}/${row.total}</td>
+          <td><strong style="font-size:1.05rem; color:var(--primary);">${row.skor}</strong></td>
+          <td>${statusBadge}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="deleteScore(${row.id})">Hapus</button></td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function deleteScore(id) {
+    if (!confirm("Hapus data nilai regu ini?")) return;
+    leaderboard = leaderboard.filter(item => item.id !== id);
+    saveAllState();
+    renderLeaderboard();
+  }
+
+  function clearLeaderboard() {
+    if (!confirm("Yakin ingin mereset/menghapus seluruh rekap nilai?")) return;
+    leaderboard = [];
+    saveAllState();
+    renderLeaderboard();
+  }
+
+  function exportCSV() {
+    if (leaderboard.length === 0) return alert("Belum ada data untuk diekspor.");
+    const sorted = [...leaderboard].sort((a, b) => b.skor - a.skor || b.benar - a.benar);
+    let csv = "Peringkat,Kelas,Nama Regu,Tahap,Benar,Total Soal,Skor\n";
+    sorted.forEach((r, i) => {
+      csv += `${i + 1},"${r.kelas}","${r.namaRegu}","${r.tahap}",${r.benar},${r.total},${r.skor}\n`;
+    });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Rekap_LCC_Hari_Pahlawan_SMPN1Semanu.csv";
+    a.click();
+  }
+
+  // Question Bank CRUD
+  function renderQuestionList() {
+    const filter = document.getElementById("filterBankSoal").value;
+    const container = document.getElementById("questionListContainer");
+    const letters = ["A", "B", "C", "D"];
+
+    const listWithIndex = questions.map((q, idx) => ({ ...q, origIdx: idx }))
+      .filter(q => filter === "ALL" || q.category === filter);
+
+    if (listWithIndex.length === 0) {
+      container.innerHTML = `<p style="text-align:center; color:var(--muted); padding:20px;">Bank soal kosong. Silakan tambah soal baru atau pulihkan soal bawaan.</p>`;
+      return;
+    }
+
+    container.innerHTML = listWithIndex.map((q, i) => `
+      <div class="q-item">
+        <div class="q-item-header">
+          <div>
+            <span class="badge badge-blue">${q.category}</span>
+            <strong style="display:block; margin-top:6px;">${i + 1}. ${q.question}</strong>
+          </div>
+          <div style="display:flex; gap:6px; flex-shrink:0;">
+            <button class="btn btn-outline btn-sm" onclick="editQuestion(${q.origIdx})">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteQuestion(${q.origIdx})">Hapus</button>
+          </div>
+        </div>
+        <div style="font-size:0.9rem; color:var(--muted); margin-top:6px;">
+          ${q.options.map((opt, oi) => `<span style="margin-right:12px; ${oi === q.answer ? 'color:var(--success); font-weight:700;' : ''}">${letters[oi]}. ${opt}</span>`).join("")}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function saveQuestion() {
+    const editIdx = parseInt(document.getElementById("editSoalIndex").value);
+    const category = document.getElementById("soalCategory").value.trim();
+    const question = document.getElementById("soalQuestion").value.trim();
+    const options = [
+      document.getElementById("optA").value.trim(),
+      document.getElementById("optB").value.trim(),
+      document.getElementById("optC").value.trim(),
+      document.getElementById("optD").value.trim()
+    ];
+    const answer = parseInt(document.getElementById("soalAnswer").value);
+
+    if (!category || !question || options.some(o => !o)) {
+      return alert("Harap lengkapi kategori, pertanyaan, dan keempat pilihan jawaban!");
+    }
+
+    const payload = { category, question, options, answer };
+    if (editIdx >= 0) {
+      questions[editIdx] = payload;
+    } else {
+      questions.push(payload);
+    }
+
+    saveAllState();
+    cancelEditQuestion();
+    populateCategoryDropdowns();
+    renderQuestionList();
+  }
+
+  function editQuestion(idx) {
+    const q = questions[idx];
+    document.getElementById("editSoalIndex").value = idx;
+    document.getElementById("formSoalTitle").textContent = "✏️ Edit Soal #" + (idx + 1);
+    document.getElementById("soalCategory").value = q.category;
+    document.getElementById("soalQuestion").value = q.question;
+    document.getElementById("optA").value = q.options[0];
+    document.getElementById("optB").value = q.options[1];
+    document.getElementById("optC").value = q.options[2];
+    document.getElementById("optD").value = q.options[3];
+    document.getElementById("soalAnswer").value = q.answer;
+    document.getElementById("btnCancelEdit").classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function cancelEditQuestion() {
+    document.getElementById("editSoalIndex").value = "-1";
+    document.getElementById("formSoalTitle").textContent = "+ Tambah / Edit Soal";
+    document.getElementById("soalQuestion").value = "";
+    document.getElementById("optA").value = "";
+    document.getElementById("optB").value = "";
+    document.getElementById("optC").value = "";
+    document.getElementById("optD").value = "";
+    document.getElementById("btnCancelEdit").classList.add("hidden");
+  }
+
+  function deleteQuestion(idx) {
+    if (!confirm("Hapus soal ini?")) return;
+    questions.splice(idx, 1);
+    saveAllState();
+    populateCategoryDropdowns();
+    renderQuestionList();
+  }
+
+  function deleteAllQuestions() {
+    if (!confirm("PERINGATAN: Semua soal dalam bank soal akan dihapus permanen. Lanjutkan?")) return;
+    questions = [];
+    saveAllState();
+    populateCategoryDropdowns();
+    renderQuestionList();
+  }
+
+  function restoreDefaultQuestions() {
+    if (!confirm("Pulihkan 50 soal PPKn Hari Pahlawan (25 Tahap 1 + 25 Tahap 2)?")) return;
+    questions = JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
+    saveAllState();
+    populateCategoryDropdowns();
+    renderQuestionList();
+  }
+
+  function exportJSON() {
+    const blob = new Blob([JSON.stringify(questions, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Bank_Soal_LCC_SMPN1Semanu.json";
+    a.click();
+  }
+
+  function importJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if (!Array.isArray(imported)) throw new Error("Format tidak valid");
+        questions = imported;
+        saveAllState();
+        populateCategoryDropdowns();
+        renderQuestionList();
+        alert(`Berhasil mengimpor ${imported.length} soal!`);
+      } catch (err) {
+        alert("File JSON tidak valid.");
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // Settings & Passwords
+  function loadSettingsForm() {
+    const cats = getCategories();
+    const container = document.getElementById("stagePasswordSettings");
+    container.innerHTML = cats.map(c => `
+      <div class="form-group">
+        <label>Password untuk: <span style="color:var(--primary);">${c}</span></label>
+        <input type="text" class="stage-pass-input" data-cat="${c}" value="${stagePasswords[c] || ''}" placeholder="Kosongkan jika tanpa password" />
+      </div>
+    `).join("");
+
+    document.getElementById("settingSchoolName").value = settings.schoolName;
+    document.getElementById("settingQuizTitle").value = settings.quizTitle;
+    document.getElementById("settingAdminPin").value = settings.adminPin;
+  }
+
+  function saveStagePasswords() {
+    document.querySelectorAll(".stage-pass-input").forEach(inp => {
+      stagePasswords[inp.dataset.cat] = inp.value.trim();
+    });
+    saveAllState();
+    alert("Password setiap tahap berhasil disimpan!");
+  }
+
+  function uploadSchoolLogo(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      settings.logo = e.target.result;
+      saveAllState();
+      applyBranding();
+      alert("Logo sekolah berhasil diperbarui!");
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function saveGeneralSettings() {
+    settings.schoolName = document.getElementById("settingSchoolName").value.trim() || "SMP NEGERI 1 SEMANU";
+    settings.quizTitle = document.getElementById("settingQuizTitle").value.trim() || "Lomba Cerdas Cermat";
+    const newPin = document.getElementById("settingAdminPin").value.trim();
+    if (newPin) settings.adminPin = newPin;
+    saveAllState();
+    applyBranding();
+    alert("Pengaturan identitas sekolah dan PIN berhasil disimpan!");
+  }
+
+  // Initialize App
+  applyBranding();
+  populateCategoryDropdowns();
+</script>
+  <!-- Bagian Konten Utama Berakhir di Sini -->
+</div> <!-- Penutup container -->
+
+<footer>
+  Aplikasi LCC Hari Pahlawan Powered by@Ari_Nopriyani 2026
+</footer>
+
+</body>
+</html>
+</body>
+</html>
